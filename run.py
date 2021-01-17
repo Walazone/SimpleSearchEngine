@@ -19,9 +19,14 @@ print("=================================================================")
 
 with open("questions.jsonl", "r") as f:
     questions = f.readlines()
-questions = [json.loads(q)["question"] for q in questions]
+questions = [json.loads(q) for q in questions]
 
-engine = QuestionSearchEngine(questions)
-query = "what is angular"
+# mapping from question index to question id
+idx2id = {idx: question["id"] for idx, question in enumerate(questions)}
+corpus = [item["question"] for item in questions]
+
+engine = QuestionSearchEngine(corpus)
+query = "What is angular?"
 print("Question: ", query)
-pprint(engine.most_similar(query))
+for similarity, uid, text in engine.most_similar(query):
+    print(f"({similarity}, {idx2id[uid]}, {text})")

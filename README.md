@@ -7,7 +7,7 @@ To run tests
 python -m pytest
 ```
 
-To use TfIdfVectorizer
+Example usage of TfIdfVectorizer
 ```
 from nlp.vectorizers import TfIdfVectorizer
 
@@ -22,7 +22,7 @@ query_vector = vectorizer.transform(["what is life"])
 print(query_vector)
 ```
 
-To use SearchEngine
+Example usage of SearchEngine
 ```
 corpus = [
     "This is the first document.",
