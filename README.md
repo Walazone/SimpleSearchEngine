@@ -2,6 +2,11 @@
 
 Recommended python version 3.6.8
 
+To run demo
+```
+python run.py
+```
+
 To run tests
 ```
 python -m pytest

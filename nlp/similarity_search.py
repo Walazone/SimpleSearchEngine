@@ -18,8 +18,10 @@ def cosine_similarity(
         The vector of (1, N) shape with values in range [-1, 1] representing similarity
         between a query and a given vector where 1 is max similarity i.e. two vectors are the same.
     """
-
     q, corpus = query_vector, corpus_vectors
+
+    assert q.shape[0] == 1
+    assert q.shape[1] == corpus_vectors.shape[1]
     # ignore division with 0 warnings
     with np.errstate(divide="ignore", invalid="ignore"):
         result = (q @ corpus.T) / (norm(q) * norm(corpus, axis=1))
@@ -45,7 +47,7 @@ class QuestionSearchEngine:
         self.questions = questions
         self.X = self.vectorizer.fit_transform(questions)
 
-    def most_similar(self, query: str, n: int = 5) -> List[Tuple[float, str]]:
+    def most_similar(self, query: str, n: int = 5) -> List[Tuple[float, int, str]]:
         """Return top n most similar questions from corpus.
 
         Input question are cleaned and vectorized with fitted
